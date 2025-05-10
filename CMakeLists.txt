@@ -44,7 +44,8 @@ add_executable(${PROJECT_NAME}_node src/md80_node.cpp)
 target_link_libraries(${PROJECT_NAME}_node candle)
 target_include_directories(${PROJECT_NAME}_node PUBLIC ./candle/include ${CMAKE_SOURCE_DIR}/include)
 
-rosidl_target_interfaces(${PROJECT_NAME}_node ${PROJECT_NAME} "rosidl_typesupport_cpp")  # Links msgs from this very package
+rosidl_get_typesupport_target(cpp_typesupport_target "${PROJECT_NAME}" "rosidl_typesupport_cpp")
+target_link_libraries(${PROJECT_NAME}_node "${cpp_typesupport_target}")
 ament_target_dependencies(${PROJECT_NAME}_node rclcpp sensor_msgs)
 
 install(TARGETS ${PROJECT_NAME}_node 
